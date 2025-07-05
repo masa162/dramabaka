@@ -1,26 +1,27 @@
 import Link from 'next/link'
+import { SAMPLE_DRAMAS } from '@/lib/data/dramas'
+import { sortDramasByReviewCount } from '@/lib/utils'
 
 export default function RightSidebar() {
+  const buzzDramas = sortDramasByReviewCount(SAMPLE_DRAMAS).slice(0, 3)
+
   return (
     <div className="right-column">
       <div className="sidebar-section">
         <div className="sidebar-header">今週のバズドラマ</div>
         <div className="sidebar-content">
-          <div className="ranking-item">
-            <span className="ranking-number">🥇</span>
-            <span className="ranking-title">九龍城塞の恋人</span>
-            <span className="ranking-score">156件</span>
-          </div>
-          <div className="ranking-item">
-            <span className="ranking-number">🥈</span>
-            <span className="ranking-title">不適切にも〜</span>
-            <span className="ranking-score">132件</span>
-          </div>
-          <div className="ranking-item">
-            <span className="ranking-number">🥉</span>
-            <span className="ranking-title">アンメット</span>
-            <span className="ranking-score">98件</span>
-          </div>
+          {buzzDramas.map((drama, index) => {
+            const medals = ['🥇', '🥈', '🥉']
+            return (
+              <div key={drama.id} className="ranking-item">
+                <span className="ranking-number">{medals[index]}</span>
+                <span className="ranking-title">
+                  <Link href={`/dramas/${drama.slug}`}>{drama.title}</Link>
+                </span>
+                <span className="ranking-score">{drama.reviewCount}件</span>
+              </div>
+            )
+          })}
         </div>
       </div>
       

@@ -6,9 +6,15 @@ import Footer from '@/components/layout/Footer'
 import WarningBox from '@/components/common/WarningBox'
 import ContentSection from '@/components/common/ContentSection'
 import ReviewItem from '@/components/common/ReviewItem'
+import { SAMPLE_DRAMAS } from '@/lib/data/dramas'
+import { SAMPLE_REVIEWS } from '@/lib/data/reviews'
+import { getLatestReviews, formatBakaLevel, formatDate } from '@/lib/utils'
 import Link from 'next/link'
 
 export default function Home() {
+  const latestReviews = getLatestReviews(SAMPLE_REVIEWS, 3)
+  const warningDrama = SAMPLE_DRAMAS.find(d => d.isWarning)
+
   return (
     <>
       <Header />
@@ -19,10 +25,12 @@ export default function Home() {
           <LeftSidebar />
           
           <div className="center-column">
-            <WarningBox>
-              「九龍城塞の恋人」視聴により廃人続出！！<br />
-              視聴は計画的に...
-            </WarningBox>
+            {warningDrama && (
+              <WarningBox>
+                「{warningDrama.title}」視聴により廃人続出！！<br />
+                視聴は計画的に...
+              </WarningBox>
+            )}
             
             <ContentSection title="★★★ようこそ！ドラマバカ一代へ★★★">
               こんにちは、管理人の廃人1号です。<br /><br />
@@ -38,32 +46,21 @@ export default function Home() {
             </ContentSection>
             
             <ContentSection title="◆最新のバカ感想◆">
-              <ReviewItem
-                drama="トリリオンゲーム"
-                rating="★★★(沼が見えてきた)"
-                comment="毎回ドキドキが止まらない...もう仕事が手につかない。録画を3回見直してしまった自分がヤバい"
-                author="バカ仲間A"
-                date="2025/07/05 18:30"
-                isNew={true}
-              />
-              
-              <ReviewItem
-                drama="不適切にもほどがある！"
-                rating="★★★★(もう戻れない)"
-                comment="昭和と令和が混在する世界観にハマりすぎて危険。阿部サダヲの演技に完全にやられました..."
-                author="沼民B"
-                date="2025/07/05 17:45"
-                isHot={true}
-              />
-              
-              <ReviewItem
-                drama="アンメット ある脳外科医の日記"
-                rating="★★★★★(完全に廃人)"
-                comment="医療ドラマなのに恋愛要素で完全に沼落ち。杉咲花ちゃんが可愛すぎて生きるのが辛い...助けて"
-                author="廃人C"
-                date="2025/07/05 16:20"
-                isHot={true}
-              />
+              {latestReviews.map(review => {
+                const drama = SAMPLE_DRAMAS.find(d => d.id === review.dramaId)
+                return (
+                  <ReviewItem
+                    key={review.id}
+                    drama={drama?.title || '不明なドラマ'}
+                    rating={formatBakaLevel(review.bakaLevel)}
+                    comment={review.oneLineComment}
+                    author={review.nickname}
+                    date={formatDate(review.createdAt)}
+                    isNew={review.isNew}
+                    isHot={review.isHot}
+                  />
+                )
+              })}
               
               <div style={{textAlign: 'right', marginTop: '10px'}}>
                 <Link href="/reviews" className="button-link">もっと見る &gt;&gt;</Link>

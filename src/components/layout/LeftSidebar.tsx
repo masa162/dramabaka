@@ -1,59 +1,51 @@
 import Link from 'next/link'
+import { SAMPLE_DRAMAS } from '@/lib/data/dramas'
+import { sortDramasByBakaLevel, formatBakaLevel, generateAccessCounter } from '@/lib/utils'
 
 export default function LeftSidebar() {
+  const topDramas = sortDramasByBakaLevel(SAMPLE_DRAMAS).slice(0, 5)
+  const warningDrama = SAMPLE_DRAMAS.find(d => d.isWarning)
+  const accessCount = generateAccessCounter()
+
   return (
     <div className="left-column">
       <div className="sidebar-section">
         <div className="sidebar-header">アクセスカウンタ</div>
         <div className="sidebar-content">
-          <div className="counter">012345</div>
-          あなたは012345人目の<br />
+          <div className="counter">{accessCount}</div>
+          あなたは{accessCount}人目の<br />
           バカ仲間です！
         </div>
       </div>
       
-      <div className="sidebar-section">
-        <div className="sidebar-header">★今週の要注意★</div>
-        <div className="sidebar-content">
-          <div className="sparkle">九龍城塞の恋人</div>
-          <div style={{color: '#ff0000', fontWeight: 'bold'}}>
-          ★★★★★(廃人確定)
-          </div>
-          <div style={{fontSize: '10px', marginTop: '3px'}}>
-          完全にヤバいです。<br />
-          視聴注意！！！
+      {warningDrama && (
+        <div className="sidebar-section">
+          <div className="sidebar-header">★今週の要注意★</div>
+          <div className="sidebar-content">
+            <div className="sparkle">{warningDrama.title}</div>
+            <div style={{color: '#ff0000', fontWeight: 'bold'}}>
+            {formatBakaLevel(warningDrama.averageBakaLevel)}(廃人確定)
+            </div>
+            <div style={{fontSize: '10px', marginTop: '3px'}}>
+            完全にヤバいです。<br />
+            視聴注意！！！
+            </div>
           </div>
         </div>
-      </div>
+      )}
       
       <div className="sidebar-section">
         <div className="sidebar-header">廃人度ランキング</div>
         <div className="sidebar-content">
-          <div className="ranking-item">
-            <span className="ranking-number">1位</span>
-            <span className="ranking-title">九龍城塞の恋人</span>
-            <span className="ranking-score">★★★★★</span>
-          </div>
-          <div className="ranking-item">
-            <span className="ranking-number">2位</span>
-            <span className="ranking-title">アンメット</span>
-            <span className="ranking-score">★★★★★</span>
-          </div>
-          <div className="ranking-item">
-            <span className="ranking-number">3位</span>
-            <span className="ranking-title">不適切にもほどがる</span>
-            <span className="ranking-score">★★★★</span>
-          </div>
-          <div className="ranking-item">
-            <span className="ranking-number">4位</span>
-            <span className="ranking-title">トリリオンゲーム</span>
-            <span className="ranking-score">★★★</span>
-          </div>
-          <div className="ranking-item">
-            <span className="ranking-number">5位</span>
-            <span className="ranking-title">厨房のありす</span>
-            <span className="ranking-score">★★</span>
-          </div>
+          {topDramas.map((drama, index) => (
+            <div key={drama.id} className="ranking-item">
+              <span className="ranking-number">{index + 1}位</span>
+              <span className="ranking-title">
+                <Link href={`/dramas/${drama.slug}`}>{drama.title}</Link>
+              </span>
+              <span className="ranking-score">{formatBakaLevel(drama.averageBakaLevel)}</span>
+            </div>
+          ))}
         </div>
       </div>
       
