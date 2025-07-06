@@ -1,4 +1,4 @@
-// ドラマの基本情報
+// ドラマの基本情報（既存）
 export interface Drama {
   id: string
   title: string
@@ -15,6 +15,70 @@ export interface Drama {
   status: 'airing' | 'ended' | 'upcoming'
   isWarning: boolean    // 要注意フラグ
   posterUrl?: string
+}
+
+// ドラマ詳細情報（新規）
+export interface DramaDetail {
+  // 基本情報
+  title: string
+  slug: string
+  english_title?: string
+  
+  // 放送情報
+  broadcaster: string
+  genre: string
+  season: 'winter' | 'spring' | 'summer' | 'autumn'
+  year: number
+  timeslot: string
+  air_start: string
+  air_end?: string
+  total_episodes: number
+  episode_length: number
+  
+  // 制作・キャスト
+  production: {
+    script: string[]
+    director: string[]
+    producer: string[]
+    music?: string
+    production_company: string
+  }
+  
+  cast: {
+    main: Array<{
+      name: string
+      character: string
+      description: string
+    }>
+    supporting: Array<{
+      name: string
+      character: string
+      description: string
+    }>
+  }
+  
+  // コンテンツ
+  synopsis: string
+  content: string
+  
+  // バカ度
+  initial_baka_level: number
+  warning_flags: string[]
+  
+  // メタデータ
+  tags: string[]
+  categories: string[]
+  status: 'upcoming' | 'airing' | 'ended' | 'cancelled'
+  
+  // 管理情報
+  created_at: string
+  updated_at: string
+  author: string
+  
+  // パス情報
+  filePath: string
+  urlPath: string
+  imagePath: string
 }
 
 // レビュー・感想

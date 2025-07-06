@@ -306,6 +306,109 @@ body {
   background: #f0f0f0;
 }
 
+/* ドラマ詳細ページ */
+.drama-detail-container {
+  max-width: 100%;
+}
+
+.drama-header-section {
+  margin-bottom: 15px;
+}
+
+.drama-meta-grid {
+  background: #f8f8f8;
+  padding: 10px;
+  border: 1px solid #cccccc;
+}
+
+.drama-cast-section {
+  margin-bottom: 15px;
+}
+
+.drama-cast-grid {
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.drama-production-section {
+  margin-bottom: 15px;
+}
+
+.drama-production-info {
+  background: #f8f8f8;
+  padding: 10px;
+  border: 1px solid #cccccc;
+}
+
+.baka-rating-box {
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.baka-level {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+}
+
+.baka-emoji {
+  font-size: 24px;
+  margin-bottom: 8px;
+}
+
+.baka-label {
+  font-weight: bold;
+  font-size: 14px;
+  color: #ff0000;
+}
+
+.warning-flags {
+  text-align: left;
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid #cccccc;
+}
+
+.warning-flags ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.warning-flags li {
+  padding: 2px 0;
+  position: relative;
+  padding-left: 16px;
+}
+
+.warning-flags li:before {
+  content: "⚠️";
+  position: absolute;
+  left: 0;
+  font-size: 10px;
+}
+
+.retro-warning-box {
+  background: #ffff00;
+  border: 3px solid #ff0000;
+  padding: 15px;
+  margin: 15px 0;
+}
+
+.retro-warning-box .content-header {
+  background: #ff0000;
+  color: #ffffff;
+  margin: -15px -15px 15px -15px;
+  padding: 8px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.retro-warning-box .content-body {
+  background: transparent;
+  padding: 0;
+}
+
 /* レスポンシブ */
 @media (max-width: 768px) {
   .main-table {
@@ -327,5 +430,17 @@ body {
   
   .menu-cell {
     min-width: 80px;
+  }
+  
+  .drama-cast-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .drama-meta-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .drama-production-info {
+    grid-template-columns: 1fr;
   }
 }
