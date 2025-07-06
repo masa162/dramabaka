@@ -1,4 +1,4 @@
-import { Drama, Review, BakaLevelInfo } from './types'
+import { Drama, Review, LegacyReview, BakaLevelInfo } from './types'
 import { BAKA_LEVELS } from './constants'
 
 // バカ度レベル情報を取得
@@ -17,14 +17,27 @@ export function getDramaBySlug(dramas: Drama[], slug: string): Drama | undefined
   return dramas.find(drama => drama.slug === slug)
 }
 
-// ドラマに関連するレビューを取得
-export function getReviewsByDrama(reviews: Review[], dramaId: string): Review[] {
+// ドラマに関連するレビューを取得（新フォーム用）
+export function getReviewsByDrama(reviews: Review[], dramaSlug: string): Review[] {
+  return reviews.filter(review => review.dramaSlug === dramaSlug)
+    .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime())
+}
+
+// ドラマに関連するレビューを取得（既存データ用）
+export function getLegacyReviewsByDrama(reviews: LegacyReview[], dramaId: string): LegacyReview[] {
   return reviews.filter(review => review.dramaId === dramaId)
     .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
 }
 
-// 最新のレビューを取得
+// 最新のレビューを取得（新フォーム用）
 export function getLatestReviews(reviews: Review[], limit: number = 5): Review[] {
+  return reviews
+    .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime())
+    .slice(0, limit)
+}
+
+// 最新のレビューを取得（既存データ用）
+export function getLatestLegacyReviews(reviews: LegacyReview[], limit: number = 5): LegacyReview[] {
   return reviews
     .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
     .slice(0, limit)

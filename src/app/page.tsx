@@ -8,11 +8,11 @@ import ContentSection from '@/components/common/ContentSection'
 import ReviewItem from '@/components/common/ReviewItem'
 import { SAMPLE_DRAMAS } from '@/lib/data/dramas'
 import { SAMPLE_REVIEWS } from '@/lib/data/reviews'
-import { getLatestReviews, formatBakaLevel, formatDate } from '@/lib/utils'
+import { getLatestLegacyReviews, formatBakaLevel, formatDate } from '@/lib/utils'
 import Link from 'next/link'
 
 export default function Home() {
-  const latestReviews = getLatestReviews(SAMPLE_REVIEWS, 3)
+  const latestReviews = getLatestLegacyReviews(SAMPLE_REVIEWS, 3)
   const warningDrama = SAMPLE_DRAMAS.find(d => d.isWarning)
 
   return (

@@ -1,6 +1,6 @@
-import { Review } from '../types'
+import { LegacyReview } from '../types'
 
-export const SAMPLE_REVIEWS: Review[] = [
+export const SAMPLE_REVIEWS: LegacyReview[] = [
   {
     id: '1',
     dramaId: '4',
