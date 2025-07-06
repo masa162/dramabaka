@@ -120,3 +120,56 @@ export async function getAllDramas(): Promise<DramaDetail[]> {
   
   return dramas
 }
+
+export async function getAllDramaSlugs(): Promise<string[][]> {
+  const slugs: string[][] = []
+  
+  try {
+    const yearsDir = path.join(contentDirectory, 'years')
+    
+    if (!fs.existsSync(yearsDir)) {
+      return slugs
+    }
+    
+    const years = fs.readdirSync(yearsDir)
+    
+    for (const year of years) {
+      const yearPath = path.join(yearsDir, year)
+      if (!fs.statSync(yearPath).isDirectory()) continue
+      
+      const seasons = fs.readdirSync(yearPath)
+      
+      for (const season of seasons) {
+        const seasonPath = path.join(yearPath, season)
+        if (!fs.statSync(seasonPath).isDirectory()) continue
+        
+        const broadcasters = fs.readdirSync(seasonPath)
+        
+        for (const broadcaster of broadcasters) {
+          const broadcasterPath = path.join(seasonPath, broadcaster)
+          if (!fs.statSync(broadcasterPath).isDirectory()) continue
+          
+          const genres = fs.readdirSync(broadcasterPath)
+          
+          for (const genre of genres) {
+            const genrePath = path.join(broadcasterPath, genre)
+            if (!fs.statSync(genrePath).isDirectory()) continue
+            
+            const files = fs.readdirSync(genrePath)
+            
+            for (const file of files) {
+              if (file.endsWith('.md')) {
+                const slug = [year, season, broadcaster, genre, file.replace('.md', '')]
+                slugs.push(slug)
+              }
+            }
+          }
+        }
+      }
+    }
+  } catch (error) {
+    console.error('Error fetching drama slugs:', error)
+  }
+  
+  return slugs
+}
