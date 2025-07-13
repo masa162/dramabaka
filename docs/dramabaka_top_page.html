@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="Shift_JIS">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ドラマバカ一代　〜見すぎて頭おかしくなったヤツらの感想サイト〜</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'MS UI Gothic', 'ＭＳ Ｐゴシック', sans-serif;
+            background: #ffffff;
+            color: #000000;
+            line-height: 1.4;
+            font-size: 12px;
+        }
+        
+        /* 2000年代風テーブルレイアウト */
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        
+        td {
+            vertical-align: top;
+            padding: 8px;
+        }
+        
+        /* ヘッダー */
+        .header-table {
+            background: linear-gradient(90deg, #ff6600 0%, #ff9900 50%, #ff6600 100%);
+            border: 2px solid #000000;
+        }
+        
+        .header-cell {
+            text-align: center;
+            padding: 15px;
+        }
+        
+        .site-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ffffff;
+            text-shadow: 2px 2px 4px #000000;
+            margin-bottom: 5px;
+        }
+        
+        .site-subtitle {
+            font-size: 14px;
+            color: #ffff00;
+            font-weight: bold;
+        }
+        
+        /* メニューバー */
+        .menu-table {
+            background: #0066cc;
+            border: 1px solid #000000;
+        }
+        
+        .menu-cell {
+            text-align: center;
+            border-right: 1px solid #ffffff;
+            padding: 8px 4px;
+        }
+        
+        .menu-cell:last-child {
+            border-right: none;
+        }
+        
+        .menu-cell a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 11px;
+        }
+        
+        .menu-cell a:hover {
+            color: #ffff00;
+            text-decoration: underline;
+        }
+        
+        /* メインコンテンツエリア */
+        .main-table {
+            margin-top: 10px;
+        }
+        
+        .left-column {
+            width: 200px;
+            background: #f0f0f0;
+            border: 1px solid #cccccc;
+        }
+        
+        .center-column {
+            background: #ffffff;
+            padding: 10px;
+        }
+        
+        .right-column {
+            width: 180px;
+            background: #f0f0f0;
+            border: 1px solid #cccccc;
+        }
+        
+        /* サイドバー */
+        .sidebar-section {
+            margin-bottom: 15px;
+            border: 1px solid #666666;
+            background: #ffffff;
+        }
+        
+        .sidebar-header {
+            background: linear-gradient(90deg, #006600 0%, #009900 100%);
+            color: #ffffff;
+            font-weight: bold;
+            padding: 5px;
+            font-size: 11px;
+            text-align: center;
+        }
+        
+        .sidebar-content {
+            padding: 8px;
+            font-size: 11px;
+            line-height: 1.3;
+        }
+        
+        .sidebar-content a {
+            color: #0000ff;
+            text-decoration: underline;
+        }
+        
+        .sidebar-content a:visited {
+            color: #800080;
+        }
+        
+        /* メインコンテンツ */
+        .content-section {
+            margin-bottom: 20px;
+            border: 2px solid #ff0000;
+            background: #ffffff;
+        }
+        
+        .content-header {
+            background: linear-gradient(90deg, #ff0000 0%, #ff6666 100%);
+            color: #ffffff;
+            font-weight: bold;
+            padding: 8px;
+            font-size: 14px;
+            text-align: center;
+        }
+        
+        .content-body {
+            padding: 10px;
+        }
+        
+        /* 告知・警告エリア */
+        .warning-box {
+            background: #ffff00;
+            border: 3px solid #ff0000;
+            padding: 10px;
+            margin: 10px 0;
+            text-align: center;
+        }
+        
+        .warning-text {
+            font-weight: bold;
+            color: #ff0000;
+            font-size: 14px;
+            text-decoration: blink;
+        }
+        
+        /* レビューリスト */
+        .review-item {
+            border: 1px solid #cccccc;
+            margin: 8px 0;
+            padding: 8px;
+            background: #f8f8f8;
+        }
+        
+        .review-drama {
+            font-weight: bold;
+            color: #0000ff;
+            font-size: 13px;
+        }
+        
+        .review-rating {
+            color: #ff6600;
+            font-weight: bold;
+            margin: 3px 0;
+        }
+        
+        .review-comment {
+            margin: 5px 0;
+            font-size: 12px;
+        }
+        
+        .review-meta {
+            font-size: 10px;
+            color: #666666;
+            text-align: right;
+        }
+        
+        /* ランキング */
+        .ranking-item {
+            padding: 4px;
+            border-bottom: 1px dotted #999999;
+            font-size: 11px;
+        }
+        
+        .ranking-number {
+            font-weight: bold;
+            color: #ff0000;
+        }
+        
+        .ranking-title {
+            color: #0000ff;
+            margin-left: 5px;
+        }
+        
+        .ranking-score {
+            float: right;
+            color: #ff6600;
+            font-weight: bold;
+        }
+        
+        /* アクセスカウンタ風 */
+        .counter {
+            background: #000000;
+            color: #00ff00;
+            font-family: 'Courier New', monospace;
+            padding: 5px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: bold;
+            border: 2px inset #cccccc;
+        }
+        
+        /* ボタン風リンク */
+        .button-link {
+            display: inline-block;
+            background: linear-gradient(90deg, #cccccc 0%, #ffffff 50%, #cccccc 100%);
+            border: 2px outset #cccccc;
+            padding: 4px 8px;
+            text-decoration: none;
+            color: #000000;
+            font-size: 11px;
+            font-weight: bold;
+        }
+        
+        .button-link:hover {
+            background: linear-gradient(90deg, #aaaaaa 0%, #dddddd 50%, #aaaaaa 100%);
+        }
+        
+        /* フッター */
+        .footer {
+            margin-top: 20px;
+            border-top: 1px solid #999999;
+            padding: 10px;
+            text-align: center;
+            font-size: 10px;
+            color: #666666;
+            background: #f0f0f0;
+        }
+        
+        /* 2000年代風装飾 */
+        .blink {
+            animation: blink 1s linear infinite;
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+        
+        .marquee-text {
+            font-weight: bold;
+            color: #ff0000;
+        }
+        
+        /* ちょっとしたエフェクト */
+        .sparkle::before {
+            content: "★";
+            color: #ffff00;
+            margin-right: 3px;
+        }
+        
+        .new-icon {
+            background: #ff0000;
+            color: #ffffff;
+            font-size: 9px;
+            padding: 1px 3px;
+            margin-left: 5px;
+            font-weight: bold;
+        }
+        
+        .hot-icon {
+            background: #ff6600;
+            color: #ffffff;
+            font-size: 9px;
+            padding: 1px 3px;
+            margin-left: 5px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <!-- ヘッダー -->
+    <table class="header-table">
+        <tr>
+            <td class="header-cell">
+                <div class="site-title">ドラマバカ一代</div>
+                <div class="site-subtitle">〜見すぎて頭おかしくなったヤツらの感想サイト〜</div>
+            </td>
+        </tr>
+    </table>
+    
+    <!-- メニュー -->
+    <table class="menu-table">
+        <tr>
+            <td class="menu-cell"><a href="/">HOME</a></td>
+            <td class="menu-cell"><a href="/dramas">ドラマ一覧</a></td>
+            <td class="menu-cell"><a href="/ranking">ランキング</a></td>
+            <td class="menu-cell"><a href="/baka-check">バカ度診断</a></td>
+            <td class="menu-cell"><a href="/review">感想投稿</a></td>
+            <td class="menu-cell"><a href="/bbs">掲示板</a></td>
+            <td class="menu-cell"><a href="/link">リンク集</a></td>
+        </tr>
+    </table>
+
+    <!-- メインコンテンツ -->
+    <table class="main-table">
+        <tr>
+            <!-- 左サイドバー -->
+            <td class="left-column">
+                <div class="sidebar-section">
+                    <div class="sidebar-header">アクセスカウンタ</div>
+                    <div class="sidebar-content">
+                        <div class="counter">012345</div>
+                        あなたは012345人目の<br>
+                        バカ仲間です！
+                    </div>
+                </div>
+                
+                <div class="sidebar-section">
+                    <div class="sidebar-header">★今週の要注意★</div>
+                    <div class="sidebar-content">
+                        <div class="sparkle">九龍城塞の恋人</div>
+                        <div style="color: #ff0000; font-weight: bold;">
+                        ★★★★★(廃人確定)
+                        </div>
+                        <div style="font-size: 10px; margin-top: 3px;">
+                        完全にヤバいです。<br>
+                        視聴注意！！！
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="sidebar-section">
+                    <div class="sidebar-header">廃人度ランキング</div>
+                    <div class="sidebar-content">
+                        <div class="ranking-item">
+                            <span class="ranking-number">1位</span>
+                            <span class="ranking-title">九龍城塞の恋人</span>
+                            <span class="ranking-score">★★★★★</span>
+                        </div>
+                        <div class="ranking-item">
+                            <span class="ranking-number">2位</span>
+                            <span class="ranking-title">アンメット</span>
+                            <span class="ranking-score">★★★★★</span>
+                        </div>
+                        <div class="ranking-item">
+                            <span class="ranking-number">3位</span>
+                            <span class="ranking-title">不適切にもほどがある</span>
+                            <span class="ranking-score">★★★★</span>
+                        </div>
+                        <div class="ranking-item">
+                            <span class="ranking-number">4位</span>
+                            <span class="ranking-title">トリリオンゲーム</span>
+                            <span class="ranking-score">★★★</span>
+                        </div>
+                        <div class="ranking-item">
+                            <span class="ranking-number">5位</span>
+                            <span class="ranking-title">厨房のありす</span>
+                            <span class="ranking-score">★★</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="sidebar-section">
+                    <div class="sidebar-header">便利リンク</div>
+                    <div class="sidebar-content">
+                        <a href="/baka-check">▼バカ度診断</a><br>
+                        <a href="/ranking">▼廃人ランキング</a><br>
+                        <a href="/bbs">▼愚痴掲示板</a><br>
+                        <a href="/search">▼ドラマ検索</a><br>
+                    </div>
+                </div>
+            </td>
+            
+            <!-- メインコンテンツ -->
+            <td class="center-column">
+                <!-- 緊急告知 -->
+                <div class="warning-box">
+                    <div class="warning-text blink">
+                        ★☆★緊急告知★☆★
+                    </div>
+                    「九龍城塞の恋人」視聴により廃人続出！！<br>
+                    視聴は計画的に...
+                </div>
+                
+                <!-- 管理人挨拶 -->
+                <div class="content-section">
+                    <div class="content-header">★★★ようこそ！ドラマバカ一代へ★★★</div>
+                    <div class="content-body">
+                        こんにちは、管理人の廃人1号です。<br><br>
+                        ここは<b>見すぎて頭おかしくなった</b>ドラマ好きが集う場所です。<br>
+                        地上波ドラマにハマりすぎて仕事も家事も手につかない...<br>
+                        そんなバカな皆さんの感想をお待ちしてます！<br><br>
+                        
+                        <marquee class="marquee-text">★新規メンバー募集中！一緒にバカになりませんか？★</marquee>
+                        
+                        <br><br>
+                        <a href="/baka-check" class="button-link">あなたのバカ度チェック！</a>
+                        <a href="/review" class="button-link">感想を投稿する</a>
+                    </div>
+                </div>
+                
+                <!-- 最新の感想 -->
+                <div class="content-section">
+                    <div class="content-header">◆最新のバカ感想◆</div>
+                    <div class="content-body">
+                        <div class="review-item">
+                            <div class="review-drama">トリリオンゲーム<span class="new-icon">NEW</span></div>
+                            <div class="review-rating">★★★(沼が見えてきた)</div>
+                            <div class="review-comment">
+                                毎回ドキドキが止まらない...もう仕事が手につかない。<br>
+                                録画を3回見直してしまった自分がヤバい
+                            </div>
+                            <div class="review-meta">投稿者：バカ仲間A　2025/07/05 18:30</div>
+                        </div>
+                        
+                        <div class="review-item">
+                            <div class="review-drama">不適切にもほどがある！<span class="hot-icon">HOT</span></div>
+                            <div class="review-rating">★★★★(もう戻れない)</div>
+                            <div class="review-comment">
+                                昭和と令和が混在する世界観にハマりすぎて危険。<br>
+                                阿部サダヲの演技に完全にやられました...
+                            </div>
+                            <div class="review-meta">投稿者：沼民B　2025/07/05 17:45</div>
+                        </div>
+                        
+                        <div class="review-item">
+                            <div class="review-drama">アンメット ある脳外科医の日記<span class="hot-icon">HOT</span></div>
+                            <div class="review-rating">★★★★★(完全に廃人)</div>
+                            <div class="review-comment">
+                                医療ドラマなのに恋愛要素で完全に沼落ち。<br>
+                                杉咲花ちゃんが可愛すぎて生きるのが辛い...助けて
+                            </div>
+                            <div class="review-meta">投稿者：廃人C　2025/07/05 16:20</div>
+                        </div>
+                        
+                        <div style="text-align: right; margin-top: 10px;">
+                            <a href="/reviews" class="button-link">もっと見る &gt;&gt;</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- お知らせ -->
+                <div class="content-section">
+                    <div class="content-header">◆管理人からのお知らせ◆</div>
+                    <div class="content-body">
+                        <b>2025/07/05</b> - 九龍城塞の恋人レビュー急増により一時的にサーバーが重くなる可能性があります<br>
+                        <b>2025/07/03</b> - バカ度診断機能を追加しました！<br>
+                        <b>2025/07/01</b> - 掲示板を設置しました。愚痴り放題です<br>
+                        <b>2025/06/28</b> - ドラマバカ一代オープン！よろしくお願いします<br>
+                    </div>
+                </div>
+            </td>
+            
+            <!-- 右サイドバー -->
+            <td class="right-column">
+                <div class="sidebar-section">
+                    <div class="sidebar-header">今週のバズドラマ</div>
+                    <div class="sidebar-content">
+                        <div class="ranking-item">
+                            <span class="ranking-number">🥇</span>
+                            <span class="ranking-title">九龍城塞の恋人</span>
+                            <span class="ranking-score">156件</span>
+                        </div>
+                        <div class="ranking-item">
+                            <span class="ranking-number">🥈</span>
+                            <span class="ranking-title">不適切にも〜</span>
+                            <span class="ranking-score">132件</span>
+                        </div>
+                        <div class="ranking-item">
+                            <span class="ranking-number">🥉</span>
+                            <span class="ranking-title">アンメット</span>
+                            <span class="ranking-score">98件</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="sidebar-section">
+                    <div class="sidebar-header">バカ度診断</div>
+                    <div class="sidebar-content">
+                        あなたのドラマ依存度は？<br>
+                        10個の質問で判定！<br><br>
+                        <a href="/baka-check" class="button-link">診断スタート</a>
+                    </div>
+                </div>
+                
+                <div class="sidebar-section">
+                    <div class="sidebar-header">相互リンク</div>
+                    <div class="sidebar-content">
+                        <a href="#">ドラマ好きの集い</a><br>
+                        <a href="#">テレビっ子広場</a><br>
+                        <a href="#">深夜ドラマ愛好会</a><br>
+                        <a href="#">月9中毒者の会</a><br>
+                        <br>
+                        <a href="/link">リンク集 &gt;&gt;</a>
+                    </div>
+                </div>
+                
+                <div class="sidebar-section">
+                    <div class="sidebar-header">管理人について</div>
+                    <div class="sidebar-content">
+                        HN：廃人1号<br>
+                        年齢：40代<br>
+                        職業：会社員(仮)<br>
+                        趣味：ドラマ鑑賞<br>
+                        特技：録画予約<br>
+                        座右の銘：<br>
+                        「ドラマは人生だ」<br><br>
+                        <a href="mailto:admin@dramabaka.com">連絡先</a>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
+    
+    <!-- フッター -->
+    <div class="footer">
+        Copyright (C) 2025 ドラマバカ一代 All Rights Reserved.<br>
+        このサイトはリンクフリーです。相互リンク募集中！<br>
+        <a href="/terms">利用規約</a> | <a href="/privacy">プライバシーポリシー</a> | <a href="/contact">お問い合わせ</a>
+    </div>
+</body>
+</html>
