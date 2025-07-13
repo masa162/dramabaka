@@ -2,7 +2,6 @@
 import { useState } from 'react'
 import Header from '@/components/layout/Header'
 import Menu from '@/components/layout/Menu'
-import LeftSidebar from '@/components/layout/LeftSidebar'
 import RightSidebar from '@/components/layout/RightSidebar'
 import Footer from '@/components/layout/Footer'
 import ContentSection from '@/components/common/ContentSection'
@@ -52,10 +51,8 @@ export default function BakaCheckPage() {
       <Menu />
 
       <div className="main-container">
-        <div className="main-table">
-          <LeftSidebar />
-          
-          <div className="center-column">
+        <div className="main-layout">
+          <main className="main-content">
             <ContentSection title="◆バカ度診断◆">
               {!showResult ? (
                 <div>
@@ -136,7 +133,7 @@ export default function BakaCheckPage() {
                 </div>
               )}
             </ContentSection>
-          </div>
+          </main>
           
           <RightSidebar />
         </div>

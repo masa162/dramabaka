@@ -1,6 +1,5 @@
 import Header from '@/components/layout/Header'
 import Menu from '@/components/layout/Menu'
-import LeftSidebar from '@/components/layout/LeftSidebar'
 import RightSidebar from '@/components/layout/RightSidebar'
 import Footer from '@/components/layout/Footer'
 import ContentSection from '@/components/common/ContentSection'
@@ -15,10 +14,8 @@ export default function DramasPage() {
       <Menu />
 
       <div className="main-container">
-        <div className="main-table">
-          <LeftSidebar />
-          
-          <div className="center-column">
+        <div className="main-layout">
+          <main className="main-content">
             <ContentSection title="◆地上波ドラマ一覧◆">
               <div style={{margin: '20px 0'}}>
                 <h3>🔥 2025年冬クール</h3>
@@ -49,7 +46,7 @@ export default function DramasPage() {
                 <Link href="/" className="button-link">&lt;&lt; HOMEに戻る</Link>
               </div>
             </ContentSection>
-          </div>
+          </main>
           
           <RightSidebar />
         </div>
