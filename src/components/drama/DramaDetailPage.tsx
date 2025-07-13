@@ -1,15 +1,26 @@
-import { FC } from 'react'
-import { DramaDetail } from '@/lib/types'
+'use client';
+
+import { FC, useState } from 'react'
+import { DramaDetail, Review } from '@/lib/types'
 import DramaHeader from './DramaHeader'
 import CastSection from './CastSection'
 import ProductionInfo from './ProductionInfo'
 import BakaRating from './BakaRating'
+import ReviewForm from '@/components/review/ReviewForm'
+import ReviewList from '@/components/review/ReviewList'
 
 interface DramaDetailPageProps {
   drama: DramaDetail
 }
 
 const DramaDetailPage: FC<DramaDetailPageProps> = ({ drama }) => {
+  const [refreshTrigger, setRefreshTrigger] = useState(0);
+
+  const handleReviewSubmitted = (newReview: Review) => {
+    console.log('新しいレビューが投稿されました:', newReview);
+    setRefreshTrigger(prev => prev + 1);
+  };
+
   return (
     <div className="drama-detail-container">
       <DramaHeader drama={drama} />
@@ -71,6 +82,16 @@ const DramaDetailPage: FC<DramaDetailPageProps> = ({ drama }) => {
           )}
         </div>
       )}
+      
+      <ReviewForm 
+        dramaSlug={drama.slug} 
+        onReviewSubmitted={handleReviewSubmitted}
+      />
+      
+      <ReviewList 
+        dramaSlug={drama.slug}
+        refreshTrigger={refreshTrigger}
+      />
     </div>
   )
 }

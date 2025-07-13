@@ -81,8 +81,8 @@ export interface DramaDetail {
   imagePath: string
 }
 
-// レビュー・感想
-export interface Review {
+// レビュー・感想（既存データ用）
+export interface LegacyReview {
   id: string
   dramaId: string
   nickname: string      // "バカ仲間A", "沼民B"
@@ -96,6 +96,19 @@ export interface Review {
   likes: number
   isNew: boolean        // NEWマーク
   isHot: boolean        // HOTマーク
+}
+
+// レビュー・感想（新フォーム用）
+export interface Review {
+  id: string
+  dramaSlug: string
+  nickname: string
+  emotion: string
+  bakaLevel: number
+  quickReview: string
+  detailedReview?: string
+  timestamp: string
+  likes: number
 }
 
 // バカ度レベル定義
@@ -131,4 +144,17 @@ export interface BakaCheckResult {
   level: 1 | 2 | 3 | 4 | 5
   info: BakaLevelInfo
   recommendation: string[]
+}
+
+// いいね機能関連の型定義
+export interface UserLike {
+  reviewId: string
+  timestamp: string
+  userId: string // ブラウザ固有ID
+}
+
+export interface LikeStats {
+  totalLikes: number
+  likedReviews: Set<string>
+  myLikesCount: number
 }
