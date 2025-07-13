@@ -1,14 +1,84 @@
 import Link from 'next/link'
 import { SAMPLE_DRAMAS } from '@/lib/data/dramas'
-import { sortDramasByReviewCount } from '@/lib/utils'
+import { sortDramasByReviewCount, sortDramasByBakaLevel, generateAccessCounter, formatBakaLevel } from '@/lib/utils'
 
 export default function RightSidebar() {
   const buzzDramas = sortDramasByReviewCount(SAMPLE_DRAMAS).slice(0, 3)
+  const topDramas = sortDramasByBakaLevel(SAMPLE_DRAMAS).slice(0, 5)
+  const warningDrama = SAMPLE_DRAMAS.find(d => d.isWarning)
+  const accessCount = generateAccessCounter()
 
   return (
-    <div className="right-column">
-      <div className="sidebar-section">
-        <div className="sidebar-header">今週のバズドラマ</div>
+    <div className="unified-sidebar">
+      {/* ナビゲーションセクション（左側から統合） */}
+      <div className="sidebar-section navigation-section">
+        <div className="sidebar-header">📺 ナビゲーション</div>
+        <div className="sidebar-content">
+          <div className="nav-menu">
+            <Link href="/" className="nav-link">🏠 HOME</Link>
+            <Link href="/dramas" className="nav-link">📺 ドラマ一覧</Link>
+            <Link href="/ranking" className="nav-link">🏆 ランキング</Link>
+            <Link href="/baka-check" className="nav-link">🧠 バカ度診断</Link>
+            <Link href="/reviews" className="nav-link">📝 過去投稿</Link>
+            <Link href="/bbs" className="nav-link">💬 愚痴掲示板</Link>
+            <Link href="/search" className="nav-link">🔍 ドラマ検索</Link>
+            <Link href="/link" className="nav-link">🔗 リンク集</Link>
+          </div>
+        </div>
+      </div>
+
+      {/* アクセスカウンタ（左側から統合） */}
+      <div className="sidebar-section counter-section">
+        <div className="sidebar-header">📊 アクセスカウンタ</div>
+        <div className="sidebar-content">
+          <div className="access-counter">
+            <div className="counter-display">{accessCount}</div>
+            <div className="counter-text">
+              あなたは{accessCount}人目の<br />
+              バカ仲間です！
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* 今週の要注意（左側から統合） */}
+      {warningDrama && (
+        <div className="sidebar-section warning-section">
+          <div className="sidebar-header">⚠️ 今週の要注意</div>
+          <div className="sidebar-content">
+            <div className="warning-drama">
+              <div className="sparkle">{warningDrama.title}</div>
+              <div className="warning-level">
+                {formatBakaLevel(warningDrama.averageBakaLevel)}(廃人確定)
+              </div>
+              <div className="warning-notice">
+                完全にヤバいです。<br />
+                視聴注意！！！
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* 廃人度ランキング（左側から統合） */}
+      <div className="sidebar-section ranking-section">
+        <div className="sidebar-header">🏆 廃人度ランキング</div>
+        <div className="sidebar-content">
+          {topDramas.map((drama, index) => (
+            <div key={drama.id} className="ranking-item">
+              <span className="ranking-number">{index + 1}位</span>
+              <span className="ranking-title">
+                <Link href={`/dramas/${drama.slug}`}>{drama.title}</Link>
+              </span>
+              <span className="ranking-score">{formatBakaLevel(drama.averageBakaLevel)}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* 今週のバズドラマ（元からの右側項目） */}
+      <div className="sidebar-section buzz-section">
+        <div className="sidebar-header">🔥 今週のバズドラマ</div>
         <div className="sidebar-content">
           {buzzDramas.map((drama, index) => {
             const medals = ['🥇', '🥈', '🥉']
@@ -25,8 +95,9 @@ export default function RightSidebar() {
         </div>
       </div>
       
-      <div className="sidebar-section">
-        <div className="sidebar-header">バカ度診断</div>
+      {/* バカ度診断（元からの右側項目） */}
+      <div className="sidebar-section diagnosis-section">
+        <div className="sidebar-header">🧠 バカ度診断</div>
         <div className="sidebar-content">
           あなたのドラマ依存度は？<br />
           10個の質問で判定！<br /><br />
@@ -34,29 +105,33 @@ export default function RightSidebar() {
         </div>
       </div>
       
-      <div className="sidebar-section">
-        <div className="sidebar-header">相互リンク</div>
+      {/* 相互リンク（元からの右側項目） */}
+      <div className="sidebar-section links-section">
+        <div className="sidebar-header">🔗 相互リンク</div>
         <div className="sidebar-content">
-          <a href="#">ドラマ好きの集い</a><br />
-          <a href="#">テレビっ子広場</a><br />
-          <a href="#">深夜ドラマ愛好会</a><br />
-          <a href="#">月9中毒者の会</a><br />
+          <a href="#" className="external-link">ドラマ好きの集い</a><br />
+          <a href="#" className="external-link">テレビっ子広場</a><br />
+          <a href="#" className="external-link">深夜ドラマ愛好会</a><br />
+          <a href="#" className="external-link">月9中毒者の会</a><br />
           <br />
           <Link href="/link">リンク集 &gt;&gt;</Link>
         </div>
       </div>
       
-      <div className="sidebar-section">
-        <div className="sidebar-header">管理人について</div>
+      {/* 管理人について（元からの右側項目） */}
+      <div className="sidebar-section admin-section">
+        <div className="sidebar-header">👤 管理人について</div>
         <div className="sidebar-content">
-          HN：廃人1号<br />
-          年齢：40代<br />
-          職業：会社員(仮)<br />
-          趣味：ドラマ鑑賞<br />
-          特技：録画予約<br />
-          座右の銘：<br />
-          「ドラマは人生だ」<br /><br />
-          <a href="mailto:admin@dramabaka.com">連絡先</a>
+          <div className="admin-info">
+            <div><strong>HN</strong>：廃人1号</div>
+            <div><strong>年齢</strong>：40代</div>
+            <div><strong>職業</strong>：会社員(仮)</div>
+            <div><strong>趣味</strong>：ドラマ鑑賞</div>
+            <div><strong>特技</strong>：録画予約</div>
+            <div><strong>座右の銘</strong>：<br />「ドラマは人生だ」</div>
+            <br />
+            <a href="mailto:admin@dramabaka.com" className="contact-link">📧 連絡先</a>
+          </div>
         </div>
       </div>
     </div>

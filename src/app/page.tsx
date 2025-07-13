@@ -1,6 +1,5 @@
 import Header from '@/components/layout/Header'
 import Menu from '@/components/layout/Menu'
-import LeftSidebar from '@/components/layout/LeftSidebar'
 import RightSidebar from '@/components/layout/RightSidebar'
 import Footer from '@/components/layout/Footer'
 import WarningBox from '@/components/common/WarningBox'
@@ -21,10 +20,8 @@ export default function Home() {
       <Menu />
 
       <div className="main-container">
-        <div className="main-table">
-          <LeftSidebar />
-          
-          <div className="center-column">
+        <div className="main-layout">
+          <main className="main-content">
             {warningDrama && (
               <WarningBox>
                 「{warningDrama.title}」視聴により廃人続出！！<br />
@@ -73,7 +70,7 @@ export default function Home() {
               <b>2025/07/01</b> - 掲示板を設置しました。愚痴り放題です<br />
               <b>2025/06/28</b> - ドラマバカ一代オープン！よろしくお願いします<br />
             </ContentSection>
-          </div>
+          </main>
           
           <RightSidebar />
         </div>
