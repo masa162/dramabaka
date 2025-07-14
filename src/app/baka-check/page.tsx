@@ -1,9 +1,5 @@
 'use client'
 import { useState } from 'react'
-import Header from '@/components/layout/Header'
-import Menu from '@/components/layout/Menu'
-import RightSidebar from '@/components/layout/RightSidebar'
-import Footer from '@/components/layout/Footer'
 import ContentSection from '@/components/common/ContentSection'
 import { BAKA_CHECK_QUESTIONS } from '@/lib/data/bakaCheck'
 import { getBakaLevelInfo } from '@/lib/utils'
@@ -47,12 +43,6 @@ export default function BakaCheckPage() {
 
   return (
     <>
-      <Header />
-      <Menu />
-
-      <div className="main-container">
-        <div className="main-layout">
-          <main className="main-content">
             <ContentSection title="◆バカ度診断◆">
               {!showResult ? (
                 <div>
@@ -132,14 +122,7 @@ export default function BakaCheckPage() {
                   })()}
                 </div>
               )}
-            </ContentSection>
-          </main>
-          
-          <RightSidebar />
-        </div>
-      </div>
-      
-      <Footer />
+      </ContentSection>
     </>
   )
 }

@@ -71,6 +71,54 @@ const DramaDetailPage: FC<DramaDetailPageProps> = ({ drama }) => {
 
   return (
     <div className="drama-detail-container">
+      <DramaHeader drama={drama} />
+
+      {/* 1. あらすじ */}
+      {drama.synopsis && (
+        <div className="content-section">
+          <div className="content-header">
+            📖 あらすじ
+          </div>
+          <div className="content-body">
+            <div style={{ 
+              fontSize: '12px', 
+              lineHeight: '1.5',
+              whiteSpace: 'pre-line'
+            }}>
+              {drama.synopsis}
+            </div>
+          </div>
+        </div>
+      )}
+      
+      {/* 2. キャスト */}
+      <CastSection drama={drama} />
+      
+      {/* 3. 製作情報 */}
+      <ProductionInfo drama={drama} />
+      
+      {/* 4. 詳細情報 */}
+      {drama.content && (
+        <div className="content-section">
+          <div className="content-header">
+            📝 詳細情報
+          </div>
+          <div className="content-body">
+            <div 
+              style={{ 
+                fontSize: '12px', 
+                lineHeight: '1.5' 
+              }}
+              dangerouslySetInnerHTML={{ 
+                __html: drama.content.replace(/\n/g, '<br>') 
+              }}
+            />
+          </div>
+        </div>
+      )}
+
+      {/* 既存の他コンテンツ */}
+      
       {/* 競争心煽りシステム */}
       <CompetitiveMotivation
         reviews={reviews}
@@ -78,8 +126,6 @@ const DramaDetailPage: FC<DramaDetailPageProps> = ({ drama }) => {
         userRankings={userRankings}
         onMotivationClick={handleMotivationClick}
       />
-
-      <DramaHeader drama={drama} />
 
       {/* ランキング切り替えセクション */}
       <div className="ranking-control-section">
@@ -156,47 +202,7 @@ const DramaDetailPage: FC<DramaDetailPageProps> = ({ drama }) => {
         onToggleVisibility={toggleViralShare}
       />
       
-      {drama.synopsis && (
-        <div className="content-section">
-          <div className="content-header">
-            📖 あらすじ
-          </div>
-          <div className="content-body">
-            <div style={{ 
-              fontSize: '12px', 
-              lineHeight: '1.5',
-              whiteSpace: 'pre-line'
-            }}>
-              {drama.synopsis}
-            </div>
-          </div>
-        </div>
-      )}
-      
       <BakaRating level={drama.initial_baka_level} warnings={drama.warning_flags} />
-      
-      <CastSection drama={drama} />
-      
-      <ProductionInfo drama={drama} />
-      
-      {drama.content && (
-        <div className="content-section">
-          <div className="content-header">
-            📝 詳細情報
-          </div>
-          <div className="content-body">
-            <div 
-              style={{ 
-                fontSize: '12px', 
-                lineHeight: '1.5' 
-              }}
-              dangerouslySetInnerHTML={{ 
-                __html: drama.content.replace(/\n/g, '<br>') 
-              }}
-            />
-          </div>
-        </div>
-      )}
       
       {drama.author && (
         <div style={{ 

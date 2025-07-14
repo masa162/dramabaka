@@ -1,7 +1,3 @@
-import Header from '@/components/layout/Header'
-import Menu from '@/components/layout/Menu'
-import RightSidebar from '@/components/layout/RightSidebar'
-import Footer from '@/components/layout/Footer'
 import ContentSection from '@/components/common/ContentSection'
 import { SAMPLE_DRAMAS } from '@/lib/data/dramas'
 import { sortDramasByBakaLevel, sortDramasByReviewCount, formatBakaLevel } from '@/lib/utils'
@@ -13,12 +9,6 @@ export default function RankingPage() {
 
   return (
     <>
-      <Header />
-      <Menu />
-
-      <div className="main-container">
-        <div className="main-layout">
-          <main className="main-content">
             <ContentSection title="◆廃人度ランキング◆">
               <div style={{margin: '20px 0'}}>
                 <h3>💀 廃人製造ドラマ TOP5</h3>
@@ -95,16 +85,9 @@ export default function RankingPage() {
               </div>
             </ContentSection>
             
-            <div style={{textAlign: 'center', marginTop: '20px'}}>
-              <Link href="/" className="button-link">&lt;&lt; HOMEに戻る</Link>
-            </div>
-          </main>
-          
-          <RightSidebar />
-        </div>
+      <div style={{textAlign: 'center', marginTop: '20px'}}>
+        <Link href="/" className="button-link">&lt;&lt; HOMEに戻る</Link>
       </div>
-      
-      <Footer />
     </>
   )
 }

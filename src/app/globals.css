@@ -39,6 +39,23 @@ body {
   font-weight: bold;
 }
 
+.header-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.header-link:hover {
+  opacity: 0.9;
+  text-decoration: none;
+}
+
+.header-link:visited {
+  color: inherit;
+}
+
 /* メニューバー */
 .menu-table {
   background: #0066cc;
@@ -419,6 +436,50 @@ body {
 @keyframes scroll-text {
   0% { transform: translateX(100%); }
   100% { transform: translateX(-100%); }
+}
+
+/* 今季のドラマセクション */
+.current-dramas-section .sidebar-content {
+  padding: 8px;
+}
+
+.weekly-drama-list {
+  font-size: 11px;
+}
+
+.weekly-day-section {
+  margin-bottom: 12px;
+}
+
+.day-header {
+  background: linear-gradient(90deg, #ff6600, #ff9900);
+  color: #ffffff;
+  font-weight: bold;
+  padding: 4px 8px;
+  font-size: 12px;
+  text-align: center;
+  border: 1px solid #cc5500;
+  margin-bottom: 4px;
+}
+
+.day-dramas {
+  padding-left: 8px;
+}
+
+.weekly-drama-item {
+  margin-bottom: 2px;
+  line-height: 1.3;
+}
+
+.weekly-drama-item a {
+  color: #0000ff;
+  text-decoration: none;
+  font-size: 11px;
+}
+
+.weekly-drama-item a:hover {
+  text-decoration: underline;
+  color: #ff0000;
 }
 
 .footer {

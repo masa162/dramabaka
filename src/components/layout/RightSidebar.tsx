@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { SAMPLE_DRAMAS } from '@/lib/data/dramas'
+import { getAllWeeklyDramas, WEEKLY_SCHEDULE } from '@/lib/data/weekly-dramas'
 import { sortDramasByReviewCount, sortDramasByBakaLevel, generateAccessCounter, formatBakaLevel } from '@/lib/utils'
 
 export default function RightSidebar() {
@@ -7,10 +8,11 @@ export default function RightSidebar() {
   const topDramas = sortDramasByBakaLevel(SAMPLE_DRAMAS).slice(0, 5)
   const warningDrama = SAMPLE_DRAMAS.find(d => d.isWarning)
   const accessCount = generateAccessCounter()
+  const weeklyDramas = getAllWeeklyDramas()
 
   return (
     <div className="unified-sidebar">
-      {/* ナビゲーションセクション（左側から統合） */}
+      {/* 1. ナビゲーションセクション */}
       <div className="sidebar-section navigation-section">
         <div className="sidebar-header">📺 ナビゲーション</div>
         <div className="sidebar-content">
@@ -27,7 +29,32 @@ export default function RightSidebar() {
         </div>
       </div>
 
-      {/* アクセスカウンタ（左側から統合） */}
+      {/* 2. 今季のドラマ（曜日別一覧） */}
+      <div className="sidebar-section current-dramas-section">
+        <div className="sidebar-header">📺 今季のドラマ</div>
+        <div className="sidebar-content">
+          <div className="weekly-drama-list">
+            {Object.entries(weeklyDramas).map(([day, dramas]) => (
+              <div key={day} className="weekly-day-section">
+                <div className="day-header">{WEEKLY_SCHEDULE[day as keyof typeof WEEKLY_SCHEDULE]}</div>
+                <div className="day-dramas">
+                  {dramas.map(drama => (
+                    <div key={drama.id} className="weekly-drama-item">
+                      <Link href={`/drama/2025/winter/${drama.broadcaster.toLowerCase()}/${drama.genre[0]}/${drama.slug}`}>
+                        {drama.title}
+                      </Link>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* 既存の他コンテンツ */}
+
+      {/* アクセスカウンタ */}
       <div className="sidebar-section counter-section">
         <div className="sidebar-header">📊 アクセスカウンタ</div>
         <div className="sidebar-content">
@@ -41,7 +68,7 @@ export default function RightSidebar() {
         </div>
       </div>
 
-      {/* 今週の要注意（左側から統合） */}
+      {/* 今週の要注意 */}
       {warningDrama && (
         <div className="sidebar-section warning-section">
           <div className="sidebar-header">⚠️ 今週の要注意</div>
@@ -60,7 +87,7 @@ export default function RightSidebar() {
         </div>
       )}
 
-      {/* 廃人度ランキング（左側から統合） */}
+      {/* 廃人度ランキング */}
       <div className="sidebar-section ranking-section">
         <div className="sidebar-header">🏆 廃人度ランキング</div>
         <div className="sidebar-content">

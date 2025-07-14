@@ -1,4 +1,7 @@
 import './globals.css'
+import Header from '@/components/layout/Header'
+import RightSidebar from '@/components/layout/RightSidebar'
+import Footer from '@/components/layout/Footer'
 
 export const metadata = {
   title: 'ドラマバカ一代 - 見すぎて頭おかしくなったヤツらの感想サイト',
@@ -12,7 +15,21 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ja">
-      <body>{children}</body>
+      <body>
+        <Header />
+
+        <div className="main-container">
+          <div className="main-layout">
+            <main className="main-content">
+              {children}
+            </main>
+            
+            <RightSidebar />
+          </div>
+        </div>
+        
+        <Footer />
+      </body>
     </html>
   )
 }
