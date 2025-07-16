@@ -6,9 +6,16 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "validate-csv": "node scripts/csv-validator.js",
+    "drama:add": "node scripts/drama-helper.js add",
+    "drama:stats": "node scripts/drama-helper.js stats",
+    "drama:search": "node scripts/drama-helper.js search",
+    "drama:next-id": "node scripts/drama-helper.js next-id",
+    "drama:update-status": "node scripts/drama-helper.js update-status"
   },
   "dependencies": {
+    "commander": "^14.0.0",
     "gray-matter": "^4.0.3",
     "next": "15.3.5",
     "react": "^19.0.0",

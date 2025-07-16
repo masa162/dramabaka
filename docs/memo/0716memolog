@@ -1,0 +1,124 @@
+test
+
+竹取、macbook
+
+
+***
+
+ドラマバカプロジェクト
+/Users/nakayamamasayuki/Documents/GitHub/dramabaka/docs/基本仕様書v1.0.md
+基本仕様書ならびに設定資料を把握してください
+
+
+***
+
+番組詳細ページを作成します。
+
+
+ドラマレビューサイトを運営しています。
+ドラマのクールが変わるタイミングは456、789、10〜12月ですかね？
+
+冬クール: 1-3月（1月開始）
+春クール: 4-6月（4月開始）
+夏クール: 7-9月（7月開始）
+秋クール: 10-12月（10月開始）
+
+
+夏クール: 7-9月（7月開始）のドラマをWEB検索してリスト化してください。
+
+
+/Users/nakayamamasayuki/Documents/GitHub/dramabaka/docs/UIUX仕様書v1.0.md
+にそって運用をします。
+手順の提案お願いします
+
+
+  2. 次の具体的手順：
+
+  1️⃣ /archives ページ作成（ハイブリッド形式）
+  2️⃣ 今季ドラマリスト表示（継承）
+  3️⃣ 年度別サマリー表示追加
+  4️⃣ 基本ナビゲーション実装
+
+
+/Users/nakayamamasayuki/Documents/GitHub/dramabaka/docs/UIUX仕様書v1.0.md
+にそって運用をすると
+
+ファイル構成
+src/
+├── app/
+│   └── archives/
+│       ├── page.tsx              # メインアーカイブ
+│       └── [year]/
+│           └── [season]/
+│               └── page.tsx      # 季別詳細
+├── components/
+│   └── archives/
+│       ├── CurrentSeasonList.tsx # 今季リスト
+│       ├── YearlyArchive.tsx     # 年度別
+│       └── SeasonDetail.tsx      # 季別詳細
+└── lib/
+    └── data/
+        └── archives.ts           # アーカイブデータ
+
+
+  番組詳細ページ、URLは放送年、数字＋連番化ｍすると良さそう
+ですかね？
+
+また、
+管理用のCSVテーブルを早めに作成して運用しようと考えています
+現段階ではまだまだ手探りの仕様書です。これにとらわれずにベストプラクティスを提案、
+アドバイスお願いします
+
+
+ハイブリッド形式で進めます。
+archiveページ作成お願いします
+
+あんぱん
+https://www.ch-review.net/contents/4841/
+
+
+参考サイト
+べらぼう
+https://www.ch-review.net/contents/4764
+
+自サイト
+https://dramabaka.com/drama/2025/winter/nhk/taiga/berabou
+
+記載する番組情報は少なくしようと考えています
+運用負荷低減
+ファクト誤差回避
+
+参考サイトを参考に提案お願いします
+
+
+  提案B: シンプル連番　通し番号
+  ＋　CSVにて俯瞰管理が現実的ですね。
+
+  これなら、アーカイブにて階層構造を移しても事故が少ないでしょう。
+
+
+  ***
+
+
+
+ありがとうございます、今回だいぶ構想を練りましたね。
+ここで基本仕様書、などv1.1とかに更新しておくといいですかね？
+もしくはアドバイスお願いします
+
+
+
+
+  次回以下からすすめる。
+
+/Users/nakayamamasayuki/Documents/GitHub/dramabaka/docs/基本仕様書v1.1.md
+を把握してください。
+
+  /Users/nakayamamasayuki/Documents/GitHub/dramabaka/docs/minimal_drama_info_proposal.md
+  claude　codeに渡せばすすめそう
+
+
+  前回作業を受けての疑問、
+  番組詳細記事ページ自体の格納、よく考えれば階層は変えなくていいんですよね。 
+  ユニーク連番＋CSVファイル管理ならば
+  各番組詳細記事ページを並べる、「今季のドラマ」と「アーカイブ」だけ定期で更新していけばいい？
+  このあたり把握できてなかったです。

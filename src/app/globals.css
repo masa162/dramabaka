@@ -13,6 +13,39 @@ body {
   font-size: 12px;
 }
 
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+  body {
+    font-size: 11px;
+  }
+  
+  /* アーカイブページのレスポンシブ対応 */
+  .seasons-grid {
+    grid-template-columns: 1fr !important;
+    gap: 8px !important;
+  }
+  
+  .archive-day-section {
+    margin-bottom: 10px !important;
+  }
+  
+  .current-season-archive {
+    font-size: 11px;
+  }
+  
+  /* ナビゲーション */
+  .nav-menu {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+  
+  .nav-link {
+    font-size: 10px;
+    padding: 3px 6px;
+  }
+}
+
 /* ヘッダー */
 .header-table {
   background: linear-gradient(90deg, #ff6600 0%, #ff9900 50%, #ff6600 100%);

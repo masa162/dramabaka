@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { SAMPLE_DRAMAS } from '@/lib/data/dramas'
 import { getAllWeeklyDramas, WEEKLY_SCHEDULE } from '@/lib/data/weekly-dramas'
+import { getIdBySlug } from '@/lib/data/drama-mapping'
 import { sortDramasByReviewCount, sortDramasByBakaLevel, generateAccessCounter, formatBakaLevel } from '@/lib/utils'
 
 export default function RightSidebar() {
@@ -19,6 +20,7 @@ export default function RightSidebar() {
           <div className="nav-menu">
             <Link href="/" className="nav-link">🏠 HOME</Link>
             <Link href="/dramas" className="nav-link">📺 ドラマ一覧</Link>
+            <Link href="/archives" className="nav-link">📚 アーカイブ</Link>
             <Link href="/ranking" className="nav-link">🏆 ランキング</Link>
             <Link href="/baka-check" className="nav-link">🧠 バカ度診断</Link>
             <Link href="/reviews" className="nav-link">📝 過去投稿</Link>
@@ -38,13 +40,17 @@ export default function RightSidebar() {
               <div key={day} className="weekly-day-section">
                 <div className="day-header">{WEEKLY_SCHEDULE[day as keyof typeof WEEKLY_SCHEDULE]}</div>
                 <div className="day-dramas">
-                  {dramas.map(drama => (
-                    <div key={drama.id} className="weekly-drama-item">
-                      <Link href={`/drama/2025/winter/${drama.broadcaster.toLowerCase()}/${drama.genre[0]}/${drama.slug}`}>
-                        {drama.title}
-                      </Link>
-                    </div>
-                  ))}
+                  {dramas.map(drama => {
+                    const dramaId = getIdBySlug(drama.slug)
+                    const href = dramaId ? `/drama/${dramaId}` : `/drama/2025/winter/${drama.broadcaster.toLowerCase()}/${drama.genre[0]}/${drama.slug}`
+                    return (
+                      <div key={drama.id} className="weekly-drama-item">
+                        <Link href={href}>
+                          {drama.title}
+                        </Link>
+                      </div>
+                    )
+                  })}
                 </div>
               </div>
             ))}
