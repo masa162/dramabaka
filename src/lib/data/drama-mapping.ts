@@ -9,7 +9,23 @@ export const DRAMA_URL_MAPPING: Record<string, number> = {
   'chihayafuru-meguri': 1307,
   '19-banme-no-karute': 1308,
   'nomen-kenji': 1309,
-  'hoso-kyoku-senkyo': 1310
+  'hoso-kyoku-senkyo': 1310,
+  'bokurahamada': 1311,
+  'aozora-beer': 1312,
+  'replica-revenge': 1313,
+  'stingers': 1314,
+  'kitakun-share': 1315,
+  'kanzen-furin': 1316,
+  'guam-week': 1317,
+  'truck-girl2': 1318,
+  'cinderella-closet': 1319,
+  'gokudo-boss': 1320,
+  'ssbc-season2': 1321,
+  'saigo-kanteinin': 1322,
+  'ebi-tai': 1323,
+  'ameagari': 1324,
+  'nihontouitsu-tokyo': 1325,
+  'tada-renai': 1326
 }
 
 // SlugからIDを取得する関数
