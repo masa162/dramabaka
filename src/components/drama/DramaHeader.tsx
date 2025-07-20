@@ -46,13 +46,13 @@ const DramaHeader: FC<DramaHeaderProps> = ({ drama }) => {
             fontSize: '11px',
             lineHeight: '1.4'
           }}>
-            <div style={{ fontWeight: 'bold' }}>放送局:</div>
+            <div style={{ fontWeight: 'bold' }}>🏢放送局:</div>
             <div>{drama.broadcaster}</div>
             
             <div style={{ fontWeight: 'bold' }}>ジャンル:</div>
             <div>{drama.genre}</div>
             
-            <div style={{ fontWeight: 'bold' }}>放送時間:</div>
+            <div style={{ fontWeight: 'bold' }}>⏰放送時間:</div>
             <div>{drama.timeslot}</div>
             
             <div style={{ fontWeight: 'bold' }}>放送期間:</div>
@@ -93,6 +93,14 @@ const DramaHeader: FC<DramaHeaderProps> = ({ drama }) => {
               <>
                 <div style={{ fontWeight: 'bold' }}>🏷️タグ:</div>
                 <div>{drama.tags.slice(0, 5).join(' / ')}</div>
+              </>
+            )}
+
+            {/* あらすじを追加 */}
+            {drama.synopsis && (
+              <>
+                <div style={{ fontWeight: 'bold' }}>📖あらすじ:</div>
+                <div style={{ lineHeight: '1.5' }}>{drama.synopsis}</div>
               </>
             )}
           </div>
