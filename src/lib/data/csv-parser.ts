@@ -11,8 +11,9 @@ export interface DramaMaster {
   status: 'airing' | 'completed' | 'upcoming'
   airStart: string
   airEnd: string
-  synopsis: string
-  cast: string[]
+  mainCast: string
+  warningFlags: string
+  tags: string[]
 }
 
 export interface ArchiveSummary {
@@ -45,8 +46,14 @@ export function parseDramasCSV(csvContent: string): DramaMaster[] {
         case 'year':
           drama.year = parseInt(value)
           break
-        case 'cast':
-          drama.cast = value.split(',').map(c => c.trim())
+        case 'main_cast':
+          drama.mainCast = value
+          break
+        case 'warning_flags':
+          drama.warningFlags = value
+          break
+        case 'tags':
+          drama.tags = value.split(',').map(t => t.trim())
           break
         case 'season':
           drama.season = value as 'spring' | 'summer' | 'autumn' | 'winter'

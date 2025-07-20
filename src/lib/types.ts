@@ -35,7 +35,7 @@ export interface DramaDetail {
   total_episodes: number
   episode_length: number
   
-  // 制作・キャスト
+  // 制作・キャスト（最小限）
   production: {
     script: string[]
     director: string[]
@@ -43,6 +43,9 @@ export interface DramaDetail {
     music?: string
     production_company: string
   }
+  
+  // 最小限キャスト・主演のみ
+  main_cast?: string
   
   cast: {
     main: Array<{

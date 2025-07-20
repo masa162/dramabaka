@@ -12,10 +12,10 @@ const path = require('path');
 const CONFIG = {
   dramaticsMasterPath: 'src/lib/data/dramas_master.csv',
   archivesSummaryPath: 'src/lib/data/archives_summary.csv',
-  validBroadcasters: ['NHK', 'フジ', '日テレ', 'TBS', 'テレ朝', 'テレ東'],
+  validBroadcasters: ['NHK', 'フジ', '日テレ', 'TBS', 'テレ朝', 'テレ東', '関西テレビ', 'カンテレ', '中京テレビ', 'TOKYO MX'],
   validSeasons: ['winter', 'spring', 'summer', 'autumn'],
   validStatuses: ['airing', 'completed', 'upcoming'],
-  validDays: ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
+  validDays: ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday', 'monday-friday']
 };
 
 class CSVValidator {
@@ -79,7 +79,7 @@ class CSVValidator {
     if (!data) return;
 
     const { headers, rows } = data;
-    const expectedHeaders = ['id', 'title', 'slug', 'year', 'season', 'broadcaster', 'timeslot', 'air_day', 'genre', 'status', 'air_start', 'air_end', 'synopsis', 'cast'];
+    const expectedHeaders = ['id', 'title', 'slug', 'year', 'season', 'broadcaster', 'timeslot', 'air_day', 'genre', 'status', 'air_start', 'air_end', 'main_cast', 'warning_flags', 'tags'];
 
     // ヘッダー検証
     if (JSON.stringify(headers) !== JSON.stringify(expectedHeaders)) {
@@ -91,7 +91,7 @@ class CSVValidator {
 
     rows.forEach((row, index) => {
       const lineNum = index + 2; // ヘッダー分+1
-      const [id, title, slug, year, season, broadcaster, timeslot, air_day, genre, status, air_start, air_end, synopsis, cast] = row;
+      const [id, title, slug, year, season, broadcaster, timeslot, air_day, genre, status, air_start, air_end, main_cast, warning_flags, tags] = row;
 
       // ID検証
       const idNum = parseInt(id);
@@ -162,12 +162,16 @@ class CSVValidator {
         this.addError(`Line ${lineNum}: Invalid air_end date '${air_end}' (use YYYY-MM-DD format)`);
       }
 
-      // キャスト検証
-      if (cast && cast.includes('"')) {
-        // カンマ区切りのキャストが正しく処理されているか
-        const castList = cast.split(',').map(c => c.trim());
-        if (castList.length === 0) {
-          this.addWarning(`Line ${lineNum}: Empty cast list`);
+      // 主演キャスト検証
+      if (!main_cast || main_cast.trim() === '') {
+        this.addWarning(`Line ${lineNum}: Empty main_cast`);
+      }
+
+      // タグ検証
+      if (tags && tags.includes('"')) {
+        const tagList = tags.split(',').map(t => t.trim());
+        if (tagList.length === 0) {
+          this.addWarning(`Line ${lineNum}: Empty tag list`);
         }
       }
     });

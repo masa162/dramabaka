@@ -56,18 +56,18 @@ export default async function DramaPage({ params }: Props) {
       production_company: drama.broadcaster
     },
     cast: {
-      main: drama.cast.map(name => ({
-        name,
+      main: [{
+        name: drama.mainCast,
         character: '',
         description: ''
-      })),
+      }],
       supporting: []
     },
-    synopsis: drama.synopsis,
-    content: drama.synopsis,
+    synopsis: drama.mainCast, // 最小限に変更
+    content: drama.mainCast,
     initial_baka_level: 3,
-    warning_flags: [],
-    tags: [drama.genre],
+    warning_flags: drama.warningFlags ? [drama.warningFlags] : [],
+    tags: drama.tags,
     categories: [drama.genre],
     status: (drama.status === 'completed' ? 'ended' : drama.status) as 'airing' | 'ended' | 'upcoming' | 'cancelled',
     created_at: new Date().toISOString(),

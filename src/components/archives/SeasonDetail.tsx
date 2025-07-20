@@ -118,12 +118,12 @@ export default function SeasonDetail({ seasonInfo, dramas }: SeasonDetailProps) 
                       </div>
                       
                       <div style={{fontSize: '12px', color: '#333'}}>
-                        <strong>キャスト：</strong>{drama.cast.join('、')}
+                        <strong>主演：</strong>{drama.mainCast}
                       </div>
                       
-                      {drama.synopsis && (
+                      {drama.warningFlags && (
                         <div style={{fontSize: '11px', color: '#666', marginTop: '5px'}}>
-                          {drama.synopsis}
+                          ⚠️ {drama.warningFlags}
                         </div>
                       )}
                     </div>
