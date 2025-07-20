@@ -1,9 +1,7 @@
 import Link from 'next/link'
 import { SAMPLE_DRAMAS } from '@/lib/data/dramas'
-import { parseDramasCSV, getCurrentDramasByDay, DAY_NAMES } from '@/lib/data/csv-parser'
+import { getWeeklyDramasFromCSV, DAY_NAMES } from '@/lib/data/drama-data'
 import { sortDramasByReviewCount, sortDramasByBakaLevel, generateAccessCounter, formatBakaLevel } from '@/lib/utils'
-import fs from 'fs'
-import path from 'path'
 
 export default function RightSidebar() {
   const buzzDramas = sortDramasByReviewCount(SAMPLE_DRAMAS).slice(0, 3)
@@ -12,10 +10,7 @@ export default function RightSidebar() {
   const accessCount = generateAccessCounter()
   
   // CSVデータから放送中ドラマを取得
-  const csvPath = path.join(process.cwd(), 'src/lib/data/dramas_master.csv')
-  const csvContent = fs.readFileSync(csvPath, 'utf-8')
-  const allDramas = parseDramasCSV(csvContent)
-  const weeklyDramas = getCurrentDramasByDay(allDramas)
+  const weeklyDramas = getWeeklyDramasFromCSV()
 
   return (
     <div className="unified-sidebar">
