@@ -20,10 +20,7 @@ WEB調査お願いします。
 
 
 ***
-所感、CSVファイル更新について、
-メリット
-複数件に及ぶ情報も一括操作できる、時短
-デメリット
+
 
 
 ***
@@ -58,7 +55,7 @@ CSV、情報管理にすれば、フラグの操作で過去のドラマも再�
 
 ***
 
-
+/Users/nakayamamasayuki/Documents/GitHub/dramabaka/docs/memo/temp_img/screenshot 2025-07-20 10.07.33.jpg
 番組ページのUIを変更します。
 https://dramabaka.com/drama/1302
 あんぱんを例に
@@ -67,8 +64,79 @@ https://dramabaka.com/drama/1302
 📺 基本情報
 
 🏢放送:NHK 月〜金→削除（番組タイトル部分にあるので）
+
 📅期間:未定→削除（番組タイトル部分にあるので）
 ⚠️要注意:2025朝ドラ→番組タイトル部分に移動
 🏷️タグ:朝ドラ / NHK / 今田美桜→番組タイトル部分に移動
 
 📺 基本情報の枠を削除して📺 （番組タイトル）の枠に統合します。
+
+
+ありがとうございます、引き続き番組情報ページUI調整を行います。
+/Users/nakayamamasayuki/Documents/GitHub/dramabaka/docs/memo/temp_img/screenshot 2025-07-20 10.28.04.jpg
+
+放送局→先頭に🏢つける
+放送時間→先頭に⏰つける
+
+
+🏷️タグの下に項目
+「📖あらすじ」追加
+
+
+***
+/Users/nakayamamasayuki/Documents/GitHub/dramabaka/docs/memo/temp_img/screenshot 2025-07-20 10.34.20.jpg
+ありがとうございます
+追加した「📖あらすじ」に表示させる情報をCSVのカラムに追加してください
+
+あんぱんの例
+
+“アンパンマン”を生み出したやなせたかしと暢の夫婦をモデルに、生きる意味も失っていた苦悩の日々と、それでも夢を忘れなかった二人の人生。何者でもなかった二人があらゆる荒波を乗り越え、“逆転しない正義”を体現した『アンパンマン』にたどり着くまでを描き、生きる喜びが全身から湧いてくるような愛と勇気の物語です。I
+
+
+***
+
+/Users/nakayamamasayuki/Documents/GitHub/dramabaka/docs/memo/temp_img/screenshot 2025-07-20 10.41.46.jpg
+
+作業ありがとうございます、
+キャッシュですかね。あらすじ表示されません。
+他の番組にも追加ためしてみようかなと思います
+
+***
+
+ありがとうございます、ここまでの整理ですが
+
+所感、CSVファイル更新について、
+
+メリット
+複数件に及ぶ情報も並列的に一括操作できる、時短、ある程度直感的、
+デメリット
+番組件数が増えて数百、数千件になってくると、管理がきつくなりそう
+***
+
+
+📺 放送中のドラマ
+で番組名をクリックすると、リンク先がスラッグ？になってる？
+キャッシュかもしれませんが、
+連番IDのURLがきいてないので、番組ページを開こうとすると、404なります。
+/Users/nakayamamasayuki/Documents/GitHub/dramabaka/docs/memo/temp_img/screenshot 2025-07-20 11.09.05.jpg
+
+
+***
+
+番組連番ID化をしたので、slug名のカラムを残していると混乱のもとになりそうですね。
+明示的に削除しておいたほうがいいでしょうか？
+もしくは長期的にDB化視野にいれるならslugはあったほうがいい？
+アドバイスお願いします
+
+
+***
+
+/Users/nakayamamasayuki/Documents/GitHub/dramabaka/docs/memo/temp_img/screenshot 2025-07-20 11.16.52.jpg
+
+slugがのこるものと、連番IDでリンクができるものがあるのが不思議ですね
+
+
+/Users/nakayamamasayuki/Documents/GitHub/dramabaka/docs/memo/temp_img/screenshot 2025-07-20 11.24.21.jpg
+
+CSV取得されないでしょうかね。
+表示消えてしまいました。
