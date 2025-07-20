@@ -14,6 +14,7 @@ export interface DramaMaster {
   mainCast: string
   warningFlags: string
   tags: string[]
+  synopsis: string
 }
 
 export interface ArchiveSummary {
@@ -54,6 +55,9 @@ export function parseDramasCSV(csvContent: string): DramaMaster[] {
           break
         case 'tags':
           drama.tags = value.split(',').map(t => t.trim())
+          break
+        case 'synopsis':
+          drama.synopsis = value
           break
         case 'season':
           drama.season = value as 'spring' | 'summer' | 'autumn' | 'winter'

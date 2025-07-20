@@ -79,7 +79,7 @@ class CSVValidator {
     if (!data) return;
 
     const { headers, rows } = data;
-    const expectedHeaders = ['id', 'title', 'slug', 'year', 'season', 'broadcaster', 'timeslot', 'air_day', 'genre', 'status', 'air_start', 'air_end', 'main_cast', 'warning_flags', 'tags'];
+    const expectedHeaders = ['id', 'title', 'slug', 'year', 'season', 'broadcaster', 'timeslot', 'air_day', 'genre', 'status', 'air_start', 'air_end', 'main_cast', 'warning_flags', 'tags', 'synopsis'];
 
     // ヘッダー検証
     if (JSON.stringify(headers) !== JSON.stringify(expectedHeaders)) {
