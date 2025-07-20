@@ -71,6 +71,30 @@ const DramaHeader: FC<DramaHeaderProps> = ({ drama }) => {
             }}>
               {getStatusLabel(drama.status)}
             </div>
+
+            {/* 主演情報を追加 */}
+            {drama.main_cast && (
+              <>
+                <div style={{ fontWeight: 'bold' }}>主演:</div>
+                <div>{drama.main_cast}</div>
+              </>
+            )}
+
+            {/* 要注意フラグを追加 */}
+            {drama.warning_flags && (
+              <>
+                <div style={{ fontWeight: 'bold', color: '#ff0000' }}>⚠️要注意:</div>
+                <div style={{ color: '#ff0000', fontWeight: 'bold' }}>{drama.warning_flags}</div>
+              </>
+            )}
+
+            {/* タグ情報を追加 */}
+            {drama.tags && drama.tags.length > 0 && (
+              <>
+                <div style={{ fontWeight: 'bold' }}>🏷️タグ:</div>
+                <div>{drama.tags.slice(0, 5).join(' / ')}</div>
+              </>
+            )}
           </div>
         </div>
       </div>

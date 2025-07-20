@@ -71,66 +71,6 @@ const DramaDetailPage: FC<DramaDetailPageProps> = ({ drama }) => {
     <div className="drama-detail-container">
       <DramaHeader drama={drama} />
 
-      {/* 統合された基本情報セクション */}
-      <div className="content-section">
-        <div className="content-header">
-          📺 基本情報
-        </div>
-        <div className="content-body">
-          <div className="drama-info-unified" style={{ 
-            fontSize: '12px', 
-            lineHeight: '1.6',
-            padding: '10px 0'
-          }}>
-            {/* 放送情報 */}
-            <div className="info-row">
-              <span className="info-icon">🏢</span>
-              <span className="info-label">放送:</span>
-              <span className="info-value">{drama.broadcaster} {drama.timeslot}</span>
-            </div>
-            
-            {/* 主演のみ */}
-            {drama.main_cast && (
-              <div className="info-row">
-                <span className="info-icon">🎭</span>
-                <span className="info-label">主演:</span>
-                <span className="info-value">{drama.main_cast}</span>
-              </div>
-            )}
-            
-            {/* 放送期間 */}
-            <div className="info-row">
-              <span className="info-icon">📅</span>
-              <span className="info-label">期間:</span>
-              <span className="info-value">
-                {drama.air_start ? new Date(drama.air_start).toLocaleDateString('ja-JP') : '未定'}
-                {drama.air_end && ` 〜 ${new Date(drama.air_end).toLocaleDateString('ja-JP')}`}
-              </span>
-            </div>
-            
-            {/* 要注意ポイント */}
-            {drama.warning_flags && (
-              <div className="info-row">
-                <span className="info-icon">⚠️</span>
-                <span className="info-label">要注意:</span>
-                <span className="info-value">{drama.warning_flags}</span>
-              </div>
-            )}
-            
-            {/* タグ */}
-            {drama.tags && drama.tags.length > 0 && (
-              <div className="info-row">
-                <span className="info-icon">🏷️</span>
-                <span className="info-label">タグ:</span>
-                <span className="info-value">
-                  {drama.tags.slice(0, 5).join(' / ')}
-                </span>
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
-
       {/* 既存の他コンテンツ */}
       
       {/* 競争心煽りシステム */}
@@ -423,42 +363,6 @@ const DramaDetailPage: FC<DramaDetailPageProps> = ({ drama }) => {
           }
         }
 
-        /* 統合された基本情報のスタイル */
-        .drama-info-unified {
-          background: #f9f9f9;
-          border: 1px solid #ddd;
-          border-radius: 5px;
-          padding: 15px;
-        }
-
-        .info-row {
-          display: flex;
-          align-items: flex-start;
-          margin-bottom: 8px;
-          padding: 4px 0;
-        }
-
-        .info-row:last-child {
-          margin-bottom: 0;
-        }
-
-        .info-icon {
-          font-size: 14px;
-          margin-right: 8px;
-          min-width: 20px;
-        }
-
-        .info-label {
-          font-weight: bold;
-          color: #333;
-          margin-right: 8px;
-          min-width: 40px;
-        }
-
-        .info-value {
-          color: #666;
-          flex: 1;
-        }
 
         /* モバイル対応 */
         @media (max-width: 600px) {
@@ -475,16 +379,6 @@ const DramaDetailPage: FC<DramaDetailPageProps> = ({ drama }) => {
           
           .quick-rank-preview {
             font-size: 12px;
-          }
-
-          .info-row {
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 2px;
-          }
-
-          .info-label {
-            min-width: auto;
           }
         }
       `}</style>
