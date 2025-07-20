@@ -471,7 +471,7 @@ body {
   100% { transform: translateX(-100%); }
 }
 
-/* 今季のドラマセクション */
+/* 放送中のドラマセクション */
 .current-dramas-section .sidebar-content {
   padding: 8px;
 }

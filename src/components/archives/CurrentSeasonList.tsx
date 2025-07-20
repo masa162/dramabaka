@@ -23,7 +23,7 @@ export default function CurrentSeasonList({ dramas, year, season }: CurrentSeaso
         fontSize: '18px',
         fontWeight: 'bold'
       }}>
-        🔥 今シーズン ({year}年{season === 'winter' ? '冬' : season}) - {totalCount}本
+        🔥 放送中のドラマ ({year}年{season === 'winter' ? '冬' : season}) - {totalCount}本
       </h3>
       
       <div className="current-season-archive">

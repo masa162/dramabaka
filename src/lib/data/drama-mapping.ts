@@ -33,7 +33,7 @@ export function convertOldUrlToNew(
   return `/drama/${year}/${season}/${broadcaster}/${genre}/${slug}`
 }
 
-// 今季ドラマの曜日別リスト（CSVベース）
+// 放送中ドラマの曜日別リスト（CSVベース）
 export const CURRENT_SEASON_BY_DAY = {
   monday: [1302, 1305], // あんぱん, 明日はもっと、いい日になる
   tuesday: [1303, 1304], // 誘拐の日, 初恋DOGs

@@ -58,7 +58,7 @@ export default async function ArchivesPage() {
             &lt;&lt; HOMEに戻る
           </Link>
           <Link href="/dramas" className="button-link" style={{marginRight: '10px'}}>
-            📺 今季ドラマ一覧
+            📺 放送中のドラマ一覧
           </Link>
           <Link href="/ranking" className="button-link">
             🏆 ランキング

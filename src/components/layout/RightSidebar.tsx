@@ -31,9 +31,9 @@ export default function RightSidebar() {
         </div>
       </div>
 
-      {/* 2. 今季のドラマ（曜日別一覧） */}
+      {/* 2. 放送中のドラマ（曜日別一覧） */}
       <div className="sidebar-section current-dramas-section">
-        <div className="sidebar-header">📺 今季のドラマ</div>
+        <div className="sidebar-header">📺 放送中のドラマ</div>
         <div className="sidebar-content">
           <div className="weekly-drama-list">
             {Object.entries(weeklyDramas).map(([day, dramas]) => (

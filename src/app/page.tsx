@@ -28,7 +28,7 @@ export default function Home() {
         <div className="marquee-text">★新規メンバー募集中！一緒にバカになりませんか？★</div>
         
         <br /><br />
-        <Link href="/dramas" className="button-link">今季のドラマ一覧</Link>
+        <Link href="/dramas" className="button-link">放送中のドラマ一覧</Link>
         <Link href="/baka-check" className="button-link">あなたのバカ度チェック！</Link>
         <Link href="/ranking" className="button-link">バカ度ランキング</Link>
       </ContentSection>
