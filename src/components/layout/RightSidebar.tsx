@@ -1,15 +1,21 @@
 import Link from 'next/link'
 import { SAMPLE_DRAMAS } from '@/lib/data/dramas'
-import { getAllWeeklyDramas, WEEKLY_SCHEDULE } from '@/lib/data/weekly-dramas'
-import { getIdBySlug } from '@/lib/data/drama-mapping'
+import { parseDramasCSV, getCurrentDramasByDay, DAY_NAMES } from '@/lib/data/csv-parser'
 import { sortDramasByReviewCount, sortDramasByBakaLevel, generateAccessCounter, formatBakaLevel } from '@/lib/utils'
+import fs from 'fs'
+import path from 'path'
 
 export default function RightSidebar() {
   const buzzDramas = sortDramasByReviewCount(SAMPLE_DRAMAS).slice(0, 3)
   const topDramas = sortDramasByBakaLevel(SAMPLE_DRAMAS).slice(0, 5)
   const warningDrama = SAMPLE_DRAMAS.find(d => d.isWarning)
   const accessCount = generateAccessCounter()
-  const weeklyDramas = getAllWeeklyDramas()
+  
+  // CSVデータから放送中ドラマを取得
+  const csvPath = path.join(process.cwd(), 'src/lib/data/dramas_master.csv')
+  const csvContent = fs.readFileSync(csvPath, 'utf-8')
+  const allDramas = parseDramasCSV(csvContent)
+  const weeklyDramas = getCurrentDramasByDay(allDramas)
 
   return (
     <div className="unified-sidebar">
@@ -38,19 +44,15 @@ export default function RightSidebar() {
           <div className="weekly-drama-list">
             {Object.entries(weeklyDramas).map(([day, dramas]) => (
               <div key={day} className="weekly-day-section">
-                <div className="day-header">{WEEKLY_SCHEDULE[day as keyof typeof WEEKLY_SCHEDULE]}</div>
+                <div className="day-header">{DAY_NAMES[day]}</div>
                 <div className="day-dramas">
-                  {dramas.map(drama => {
-                    const dramaId = getIdBySlug(drama.slug)
-                    const href = dramaId ? `/drama/${dramaId}` : `/drama/2025/winter/${drama.broadcaster.toLowerCase()}/${drama.genre[0]}/${drama.slug}`
-                    return (
-                      <div key={drama.id} className="weekly-drama-item">
-                        <Link href={href}>
-                          {drama.title}
-                        </Link>
-                      </div>
-                    )
-                  })}
+                  {dramas.map(drama => (
+                    <div key={drama.id} className="weekly-drama-item">
+                      <Link href={`/drama/${drama.id}`}>
+                        {drama.title}
+                      </Link>
+                    </div>
+                  ))}
                 </div>
               </div>
             ))}

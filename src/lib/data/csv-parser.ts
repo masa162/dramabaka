@@ -152,3 +152,38 @@ export function getDramasBySeason(dramas: DramaMaster[], year: number, season: s
 export function getCurrentDramas(dramas: DramaMaster[]): DramaMaster[] {
   return dramas.filter(drama => drama.status === 'airing')
 }
+
+// 曜日別放送中ドラマを取得
+export function getCurrentDramasByDay(dramas: DramaMaster[]): Record<string, DramaMaster[]> {
+  const currentDramas = getCurrentDramas(dramas)
+  const dayMapping: Record<string, string[]> = {
+    'monday': ['monday', 'monday-friday'],
+    'tuesday': ['tuesday', 'monday-friday'],
+    'wednesday': ['wednesday', 'monday-friday'],
+    'thursday': ['thursday', 'monday-friday'],
+    'friday': ['friday', 'monday-friday'],
+    'saturday': ['saturday'],
+    'sunday': ['sunday']
+  }
+  
+  const result: Record<string, DramaMaster[]> = {}
+  
+  Object.keys(dayMapping).forEach(day => {
+    result[day] = currentDramas.filter(drama => 
+      dayMapping[day].includes(drama.airDay)
+    )
+  })
+  
+  return result
+}
+
+// 曜日名の日本語マッピング
+export const DAY_NAMES: Record<string, string> = {
+  monday: '月',
+  tuesday: '火',
+  wednesday: '水',
+  thursday: '木',
+  friday: '金',
+  saturday: '土',
+  sunday: '日'
+}
